@@ -1,5 +1,6 @@
 # Sample Realtime Chat
 
+view the [live demo](http://wd.berkeley-pbl.com/google-realtime-demo)
 ## setting up
 
 * clone this repo
