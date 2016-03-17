@@ -1,5 +1,4 @@
-//var docId = '0BwLZUlGsG71ONks1NUhWaV9abUE' 
-var docId = '';
+var docId = '0BwLZUlGsG71ONks1NUhWaV9abUE' 
 var clientId = '158145275272-lj3m0j741dj9fp50rticq48vtrfu59jj.apps.googleusercontent.com';
 var realtimeUtils = new utils.RealtimeUtils({ clientId: clientId });
 var myAuth; //store auth info
