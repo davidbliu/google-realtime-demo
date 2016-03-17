@@ -178,6 +178,19 @@ now we should call `drawChat()` at specific places in the app. a couple places i
 * when a user clicks enter
 * when a user restarts the chat (should draw an empty chat)
 
+the last step is to add an event listener to the collaborativeList. when other people edit the list (add items to the chat) we want to see it in realtime. 
 
-__thats all folks__
+we'll change the onFileLoaded to add an eventListener to the collaborativeList. when values are added, we'll call `drawChat()`
+
+```js
+function onFileLoaded(doc) {
+  myDoc = doc;
+  myDoc.getModel().getRoot().get('chat').addEventListener(gapi.drive.realtime.EventType.VALUES_ADDED, function(){
+    drawChat();
+  });
+  drawChat();
+}
+```
+
+:)
 
