@@ -5,7 +5,7 @@ view the [live demo](http://wd.berkeley-pbl.com/google-realtime-demo)
 
 * clone this repo
 * `python -m SimpleHTTPServer`
-* localhost:3000
+* localhost:8000
 
 ## walkthrough
 
