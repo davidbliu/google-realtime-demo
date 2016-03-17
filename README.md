@@ -98,4 +98,86 @@ function onFileLoaded(doc) {
 }
 ```
 
+__implementing application logic__
+
+the previous steps are pretty much all you need to get a realtime app running. the rest is your application logic.
+
+for this app we want to be able to create new chats. I added a button called 'Restart Chat' to create a new collaborativeList when clicked
+
+```html
+<div class = 'btn' id = 'restart-chat-btn'>Restart Chat</div>
+```
+
+and an event listener to actually create the collaborativeList
+
+```js
+function restartChat(){
+  chatList = myDoc.getModel().createList();
+  myDoc.getModel().getRoot().set('chat', chatList);
+}
+
+$('#restart-chat-btn').click(function(){
+    restartChat();
+});
+
+```
+
+now we should add something to let users type in chats
+
+```html
+<textarea id = 'chat-textarea'></textarea>
+<div class = 'btn' id = 'enter-chat-btn'>Enter</div>
+```
+and the corresponding js
+
+```js
+function addChat(text){
+  chatItem = {
+    email: myAuth.email,
+    text: text
+  }
+  myDoc.getModel().getRoot().get('chat').push(chatItem);
+}
+
+$('#enter-chat-btn').click(function(){
+    addChat($('#chat-textarea').val());
+    $('#chat-textarea').val('');
+});
+```
+
+and now add something to display the chat items. our markup is just a container where the chat items will go
+
+```html
+<h1>Chat</h1>
+<div id = 'chat-container'></div>
+```
+
+we should create a method to draw the chats in our collaborativeList out on the page
+
+```js
+function getChatItems(){
+  return myDoc.getModel().getRoot().get('chat').asArray();
+}
+
+function drawChat(){
+  $('#chat-container').html('');
+  var chatItems = getChatItems().reverse();
+  _.each(chatItems, function(item){
+    chatItem = $('<div></div>');
+    $(chatItem).addClass('chat-item');
+    $(chatItem).append('<div>'+item.email+' : ' + item.text + '</div>');
+    $('#chat-container').append(chatItem);
+  });
+}
+```
+
+
+now we should call `drawChat()` at specific places in the app. a couple places include
+
+* when the doc is first loaded
+* when a user clicks enter
+* when a user restarts the chat (should draw an empty chat)
+
+
+__thats all folks__
 
