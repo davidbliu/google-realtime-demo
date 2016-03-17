@@ -36,6 +36,9 @@ function onFileInitialize(model) {
 
 function onFileLoaded(doc) {
   myDoc = doc;
+  myDoc.getModel().getRoot().get('chat').addEventListener(gapi.drive.realtime.EventType.VALUES_ADDED, function(){
+    drawChat();
+  });
   drawChat();
 }
 
